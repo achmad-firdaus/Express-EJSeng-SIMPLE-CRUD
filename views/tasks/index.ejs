@@ -1,0 +1,58 @@
+<h2>Tasks</h2>
+<a href="/tasks/create" class="btn btn-primary mb-3">Create New Task</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tasks.forEach(task => { %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td>
+        <a href="/tasks/edit/<%= task.id %>" class="btn btn-primary">Edit</a>
+        <form style="display: inline;">
+          <button type="button" class="btn btn-danger" onclick="confirmDelete(<%= task.id %>)">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+<!-- JavaScript for redirection and confirmation -->
+<script>
+  function confirmDelete(taskId) {
+    const confirmed = confirm("Are you sure you want to delete this task?");
+    if (confirmed) {
+      // If the user confirms (clicks "OK"), you can proceed with deletion
+      // For example, you can use fetch or a form submission to delete the task
+      fetch(`/tasks/delete/${taskId}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+            // Handle success, e.g., display a success message
+            alert('Task deleted successfully');
+            // Redirect to the root URL
+            window.location.href = '/';
+          } else {
+            // Handle error, e.g., display an error message
+            alert('Failed to delete task');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    } else {
+      // If the user cancels, you can provide feedback or take other actions
+      // For example, display a message
+      alert('Deletion canceled.');
+    }
+  }
+</script>

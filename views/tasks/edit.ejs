@@ -1,0 +1,44 @@
+<h2>Edit Task</h2>
+<form method="POST" action="/tasks/edit/<%= task.id %>">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="<%= task.name %>" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" name="description" rows="3"><%= task.description %></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" onclick="updateTask(<%= task.id %>)">Update Task</button>
+</form>
+
+<script>
+  function updateTask(taskId) {
+    const name = document.getElementById('name').value;
+    const description = document.getElementById('description').value;
+
+    fetch(`/tasks/edit/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          description
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Handle success, e.g., display a success message
+          alert('Task updated successfully');
+          // Redirect to the root URL
+          window.location.href = '/';
+        } else {
+          // Handle error, e.g., display an error message
+          alert('Failed to update task');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+</script>

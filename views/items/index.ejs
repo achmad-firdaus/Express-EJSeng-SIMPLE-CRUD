@@ -1,0 +1,23 @@
+<!-- views/items/index.ejs -->
+<html>
+<head>
+  <title>CRUD App</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Items List</h1>
+    <ul class="list-group">
+      <% items.forEach(item => { %>
+        <li class="list-group-item"><%= item.name %></li>
+      <% }); %>
+    </ul>
+  </div>
+  <form action="/items/create" method="post">
+    <div class="form-group">
+      <input type="text" name="name" class="form-control" placeholder="New Item" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Item</button>
+  </form>  
+</body>
+</html>
