@@ -15,9 +15,3 @@ module.exports = {
 // console.log('DB_USER:', process.env.DB_USER);
 // console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
 // console.log('DB_PORT:', process.env.DB_PORT);
-
-// host: 'localhost',
-// database: 'expressejspro1',
-// user: 'postgres',
-// password: 'achmadpostgres',
-// port: '5432',
