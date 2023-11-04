@@ -31,7 +31,7 @@ run/
 run/*
 
 # Ignore configuration files
-config.js
+# config.js
 
 # Ignore personal IDE/Editor files
 .idea
